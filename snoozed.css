@@ -1,0 +1,555 @@
+*
+{
+	box-sizing: border-box;
+}
+
+[hidden]
+{
+	display: none !important;
+}
+
+body
+{
+	display: flex;
+	min-height: 100vh;
+	margin: 0;
+	background: var(--nova-bg);
+	color: var(--nova-text);
+	font: var(--nova-font-size)/1.45 var(--nova-font);
+}
+
+:focus-visible
+{
+	outline: 2px solid var(--nova-accent);
+	outline-offset: 2px;
+}
+
+/* Sidebar, as in Firefox Settings: pill-shaped section links. */
+
+/* Stays in view while the list scrolls. */
+.sidebar
+{
+	position: sticky;
+	top: 0;
+	align-self: flex-start;
+	flex: none;
+	width: 240px;
+	max-height: 100vh;
+	padding: 1rem 0.5rem;
+	overflow-y: auto;
+}
+
+.brand
+{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0.25rem 0.5rem 1.25rem;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.nav-item
+{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 40px;
+	padding: 0.375rem 1rem;
+	border-radius: var(--nova-radius-pill);
+	color: inherit;
+	text-decoration: none;
+}
+
+.nav-item:hover
+{
+	background: var(--nova-hover);
+}
+
+.nav-item[aria-current="page"]
+{
+	background: var(--nova-accent-strong);
+	color: var(--nova-on-accent);
+}
+
+.nav-item svg
+{
+	flex: none;
+}
+
+.nav-count
+{
+	margin-inline-start: auto;
+	opacity: 0.8;
+}
+
+main
+{
+	flex: 1;
+	min-width: 0;
+	max-width: 760px;
+	padding: 1.25rem 1.5rem 4rem;
+}
+
+.section-title
+{
+	margin: 1.25rem 0 1rem;
+	font-size: 1.3594rem;
+	font-weight: 600;
+}
+
+.section > .nova-card + .nova-card
+{
+	margin-top: 1rem;
+}
+
+.search
+{
+	margin-bottom: 1.25rem;
+}
+
+.search .nova-search
+{
+	width: 100%;
+	padding-inline-start: 1rem;
+}
+
+/* Snoozed list, grouped by day */
+
+.day-group + .day-group
+{
+	margin-top: 1rem;
+}
+
+.day-group h3
+{
+	margin: 0 0 0.5rem;
+	font-size: 0.9375rem;
+	font-weight: 600;
+}
+
+.day-group .nova-card
+{
+	padding: 0.25rem;
+}
+
+.snooze-row
+{
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	min-height: 48px;
+	padding: 0.25rem 0.25rem 0.25rem 0.75rem;
+	border-radius: var(--nova-radius-medium);
+}
+
+.snooze-row:hover
+{
+	background: var(--nova-hover);
+}
+
+.snooze-row .favicon
+{
+	flex: none;
+	width: 16px;
+	height: 16px;
+}
+
+.snooze-text
+{
+	flex: 1;
+	min-width: 0;
+}
+
+.snooze-title,
+.snooze-host
+{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* A block, so long titles are cut off with an ellipsis instead of running over the time and buttons. */
+.snooze-title
+{
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
+.snooze-title:hover
+{
+	text-decoration: underline;
+}
+
+.snooze-host
+{
+	color: var(--nova-text-muted);
+	font-size: 0.8156rem;
+}
+
+.snooze-when
+{
+	flex: none;
+	color: var(--nova-text-muted);
+	font-size: 1rem;
+	white-space: nowrap;
+}
+
+.snooze-when.error
+{
+	color: var(--nova-danger);
+}
+
+.empty
+{
+	color: var(--nova-text-muted);
+}
+
+/* Shortcuts */
+
+.shortcut-controls
+{
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.shortcut-field
+{
+	min-width: 150px;
+	font-variant-numeric: tabular-nums;
+}
+
+.shortcut-field.empty
+{
+	color: var(--nova-text-muted);
+	font-weight: 400;
+}
+
+.shortcut-field.recording
+{
+	border-color: var(--nova-accent);
+	outline: 2px solid var(--nova-accent);
+	outline-offset: -1px;
+}
+
+.shortcut-row + .shortcut-row
+{
+	border-top: 1px solid var(--nova-border);
+}
+
+.key-list
+{
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 6px 16px;
+	margin: 0;
+}
+
+.key-list dt
+{
+	font-weight: 600;
+}
+
+.key-list dd
+{
+	margin: 0;
+	color: var(--nova-text-muted);
+}
+
+/* About */
+
+.about-title
+{
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: 1.2188rem;
+}
+
+.about-version
+{
+	color: var(--nova-text-muted);
+	font-size: 0.7022rem;
+	font-weight: 400;
+}
+
+.about p
+{
+	margin: 0 0 0.75rem;
+}
+
+/* A quiet callout: tinted with the accent, an accent bar on the side. */
+.heads-up
+{
+	margin: 1rem 0;
+	padding: 0.625rem 0.875rem;
+	border-radius: var(--nova-radius-medium);
+	background: var(--nova-selected);
+	font-size: 1rem;
+}
+
+/* Sync between devices */
+
+.picker-devices
+{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 12px;
+	margin: 0 0 0.625rem;
+	padding: 0;
+	border: 0;
+}
+
+.picker-devices legend
+{
+	float: left;
+	margin-inline-end: 0.25rem;
+	padding: 0;
+	color: var(--nova-text-muted);
+	font-size: 0.8156rem;
+}
+
+.picker-device-list
+{
+	display: contents;
+}
+
+.picker-devices label
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 1rem;
+}
+
+.picker-devices input
+{
+	margin: 0;
+	accent-color: var(--nova-accent-strong);
+}
+
+#device-name
+{
+	width: 200px;
+}
+
+.devices-setting
+{
+	align-items: flex-start;
+}
+
+.devices-setting > span
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.device-list
+{
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: end;
+}
+
+.device-list li
+{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 4px;
+	min-height: 32px;
+}
+
+.device-list .me
+{
+	color: var(--nova-text-muted);
+}
+
+.snooze-devices
+{
+	color: var(--nova-text-muted);
+}
+
+/* Settings */
+
+.setting
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 0.5rem 0;
+}
+
+.setting label
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.setting-hint,
+.card-text
+{
+	color: var(--nova-text-muted);
+	font-size: 0.8156rem;
+}
+
+.card-text
+{
+	margin: 0 0 0.5rem;
+}
+
+.setting input[type="time"]
+{
+	width: 130px;
+}
+
+.buttons
+{
+	display: flex;
+	gap: 8px;
+}
+
+/* Dialogs */
+
+.dialog
+{
+	width: min(380px, calc(100vw - 32px));
+	padding: 1rem 1.25rem 1.25rem;
+	border: 1px solid var(--nova-border);
+	border-radius: var(--nova-radius-large);
+	background: var(--nova-panel);
+	color: var(--nova-text);
+	box-shadow: var(--nova-shadow);
+}
+
+.dialog.wide
+{
+	width: min(560px, calc(100vw - 32px));
+}
+
+.dialog textarea
+{
+	width: 100%;
+	resize: vertical;
+	font-family: ui-monospace, monospace;
+	font-size: 0.8156rem;
+}
+
+.steps
+{
+	margin: 0 0 0.75rem;
+	padding-inline-start: 1.25rem;
+}
+
+.steps li + li
+{
+	margin-top: 0.375rem;
+}
+
+.command-row
+{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 0.375rem;
+}
+
+.command-row code
+{
+	flex: 1;
+	min-width: 0;
+	padding: 0.375rem 0.625rem;
+	overflow-x: auto;
+	border-radius: var(--nova-radius-medium);
+	background: var(--nova-surface-sunken);
+	font-size: 0.8156rem;
+	white-space: nowrap;
+}
+
+.dialog::backdrop
+{
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.dialog h3
+{
+	margin: 0 0 0.75rem;
+	font-size: 1.0031rem;
+	font-weight: 600;
+	text-align: center;
+}
+
+.dialog-buttons
+{
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 1rem;
+}
+
+.confirm-option
+{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.confirm-option input
+{
+	accent-color: var(--nova-accent);
+}
+
+/* Toast */
+
+.toast
+{
+	position: fixed;
+	inset-inline: 0;
+	bottom: 24px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: fit-content;
+	max-width: calc(100vw - 32px);
+	margin: 0 auto;
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--nova-border);
+	border-radius: var(--nova-radius-pill);
+	background: var(--nova-panel);
+	box-shadow: var(--nova-shadow);
+}
+
+.toast.error
+{
+	color: var(--nova-danger);
+}
+
+@media (max-width: 720px)
+{
+	body
+	{
+		flex-direction: column;
+	}
+
+	.sidebar
+	{
+		position: static;
+		display: flex;
+		align-items: center;
+		width: auto;
+		padding-bottom: 0;
+	}
+
+	.brand
+	{
+		margin: 0 0.75rem 0 0.5rem;
+		font-size: 1.125rem;
+	}
+}

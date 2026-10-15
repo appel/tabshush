@@ -1,0 +1,48 @@
+{
+	"manifest_version": 3,
+	"name": "TabShush",
+	"version": "0.9.0",
+	"description": "Snooze tabs until later: they close now and reopen at the time you pick.",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "tabshush@appel.github.io",
+			"strict_min_version": "128.0",
+			"data_collection_permissions": {
+				"required": ["none"]
+			}
+		}
+	},
+	"permissions": ["tabs", "storage", "alarms", "menus", "idle"],
+	"optional_permissions": ["notifications", "bookmarks"],
+	"incognito": "not_allowed",
+	"background": {
+		"scripts": ["shared/time.js", "shared/store.js", "shared/sync.js", "background.js"]
+	},
+	"action": {
+		"default_title": "TabShush",
+		"default_popup": "popup.html",
+		"default_icon": "icons/icon.svg",
+		"theme_icons": [
+			{ "light": "icons/icon-light.svg", "dark": "icons/icon-dark.svg", "size": 16 },
+			{ "light": "icons/icon-light.svg", "dark": "icons/icon-dark.svg", "size": 32 }
+		]
+	},
+	"icons": {
+		"48": "icons/icon.svg",
+		"96": "icons/icon.svg"
+	},
+	"commands": {
+		"_execute_action": {
+			"suggested_key": { "default": "Alt+Shift+S" },
+			"description": "Open the snooze menu"
+		},
+		"snooze-later": { "description": "Snooze until later today" },
+		"snooze-tomorrow": { "description": "Snooze until tomorrow" },
+		"snooze-weekend": { "description": "Snooze until the weekend" },
+		"snooze-week": { "description": "Snooze until next week" },
+		"snooze-month": { "description": "Snooze until next month" },
+		"snooze-open": { "description": "Snooze until Firefox opens again" },
+		"snooze-pick": { "description": "Snooze until a date and time you pick" },
+		"open-list": { "description": "Open the snoozed tabs list" }
+	}
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Snoozed tab</title>
+	<link id="favicon" rel="icon" href="icons/wake-tab.svg">
+	<link rel="stylesheet" href="shared/nova.css">
+	<style>
+		body
+		{
+			display: grid;
+			place-items: center;
+			min-height: 100vh;
+			margin: 0;
+			background: var(--nova-bg);
+			color: var(--nova-text);
+			font: var(--nova-font-size)/1.45 var(--nova-font);
+		}
+
+		main
+		{
+			max-width: 560px;
+			padding: 24px;
+			text-align: center;
+		}
+
+		h1
+		{
+			margin: 12px 0 4px;
+			font-size: 1.3em;
+			font-weight: 600;
+			overflow-wrap: anywhere;
+		}
+
+		p
+		{
+			margin: 0 0 8px;
+			color: var(--nova-text-muted);
+			overflow-wrap: anywhere;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<img src="icons/wake-tab.svg" alt="" width="40" height="40">
+		<h1 id="title">Snoozed tab</h1>
+		<p id="address"></p>
+		<p id="status">Woke up from TabShush. Opening…</p>
+	</main>
+	<script src="shared/time.js"></script>
+	<script src="shared/store.js"></script>
+	<script src="wake.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TabShush</title>
+	<link rel="icon" href="icons/icon.svg">
+	<link rel="stylesheet" href="shared/nova.css">
+	<link rel="stylesheet" href="shared/picker.css">
+	<link rel="stylesheet" href="snoozed.css">
+</head>
+<body>
+	<nav class="sidebar" aria-label="Sections">
+		<h1 class="brand"><img src="icons/icon.svg" alt="" width="24" height="24"> TabShush</h1>
+		<a class="nav-item" href="#snoozed" data-section="snoozed" data-icon="manage"><span>Snoozed tabs</span> <span id="nav-count" class="nav-count"></span></a>
+		<a class="nav-item" href="#settings" data-section="settings" data-icon="settings"><span>Settings</span></a>
+		<a class="nav-item" href="#shortcuts" data-section="shortcuts" data-icon="shortcuts"><span>Shortcuts</span></a>
+		<a class="nav-item" href="#about" data-section="about" data-icon="about"><span>About</span></a>
+	</nav>
+
+	<main>
+		<section id="snoozed" class="section">
+			<h2 class="section-title">Snoozed tabs</h2>
+			<div class="search">
+				<input id="search" class="nova-input nova-search" type="search" placeholder="Search snoozed tabs" aria-label="Search snoozed tabs" autocomplete="off" spellcheck="false">
+			</div>
+			<div id="list" class="list"></div>
+			<p id="empty" class="empty" hidden></p>
+		</section>
+
+		<section id="settings" class="section" hidden>
+			<h2 class="section-title">Settings</h2>
+
+			<div class="nova-card">
+				<h2>Snooze times</h2>
+				<div class="setting">
+					<label for="time-format">Time format<span class="setting-hint">How times are shown and typed</span></label>
+					<select id="time-format" class="nova-select">
+						<option value="auto">Automatic</option>
+						<option value="12">12-hour (6pm)</option>
+						<option value="24">24-hour (18:00)</option>
+					</select>
+				</div>
+				<div class="setting">
+					<label for="morning">Morning<span class="setting-hint">Tomorrow, weekends, next week and month, and dates without a time</span></label>
+					<input id="morning" class="nova-input" type="time">
+				</div>
+				<div class="setting">
+					<label for="evening">Evening<span class="setting-hint">Later Today</span></label>
+					<input id="evening" class="nova-input" type="time">
+				</div>
+				<div class="setting">
+					<label for="later-hours">Later Today, close to the evening<span class="setting-hint">From an hour before the evening time, Later Today becomes "In N Hours"</span></label>
+					<select id="later-hours" class="nova-select"></select>
+				</div>
+				<div class="setting">
+					<label for="weekend-day">Weekend<span class="setting-hint">This Weekend and Next Weekend wake up on</span></label>
+					<select id="weekend-day" class="nova-select"></select>
+				</div>
+				<div class="setting">
+					<label for="week-start">Next Week<span class="setting-hint">Wakes up on the next</span></label>
+					<select id="week-start" class="nova-select"></select>
+				</div>
+			</div>
+
+			<div class="nova-card">
+				<h2>Sync between devices</h2>
+				<p class="card-text">Keeps your snoozed tabs in Other Bookmarks › TabShush, so Firefox Sync carries them to your other devices. This needs Firefox Sync with Bookmarks ticked, and TabShush on each device. When you snooze, you choose which devices may wake the tab; it wakes on the one you are using. An idle device waits 15 minutes first, so the device you are at goes first.</p>
+				<div class="setting">
+					<label for="sync-bookmarks">Keep snoozed tabs in bookmarks<span class="setting-hint">Firefox asks for permission to use bookmarks the first time</span></label>
+					<input id="sync-bookmarks" class="nova-switch" type="checkbox">
+				</div>
+				<div id="sync-details" hidden>
+					<div class="setting">
+						<label for="device-name">This device's name<span class="setting-hint">Shown under "Wake on" on your other devices</span></label>
+						<input id="device-name" class="nova-input" type="text" maxlength="40" autocomplete="off" spellcheck="false">
+					</div>
+					<div class="setting devices-setting">
+						<span>Devices<span class="setting-hint">Found in the TabShush bookmark folder</span></span>
+						<ul id="device-list" class="device-list"></ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="nova-card">
+				<h2>Motion</h2>
+				<div class="setting">
+					<label for="reduce-motion">Reduce motion<span class="setting-hint">Woken tabs blink their bell icon until you open them; this stops that. Automatic follows your system's setting.</span></label>
+					<select id="reduce-motion" class="nova-select">
+						<option value="auto">Automatic</option>
+						<option value="on">On (no animation)</option>
+						<option value="off">Off</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="nova-card">
+				<h2>Toolbar button</h2>
+				<div class="setting">
+					<label for="show-badge">Show the number of snoozed tabs<span class="setting-hint">As a badge on the TabShush button</span></label>
+					<input id="show-badge" class="nova-switch" type="checkbox">
+				</div>
+			</div>
+
+			<div class="nova-card">
+				<h2>When a tab wakes up</h2>
+				<p class="card-text">It opens next to the tab you are on, with the TabShush bell as its icon, and loads the page when you select it.</p>
+				<div class="setting">
+					<label for="notify">Show a notification<span class="setting-hint">Firefox asks for permission the first time</span></label>
+					<input id="notify" class="nova-switch" type="checkbox">
+				</div>
+			</div>
+
+			<div class="nova-card">
+				<h2>Backup</h2>
+				<p class="card-text">Save your snoozed tabs and settings to a file, or add them from one. Tabs already in your list are skipped.</p>
+				<div class="buttons">
+					<button id="export" class="nova-button" type="button">Export…</button>
+					<button id="import" class="nova-button" type="button">Import…</button>
+					<input id="import-file" type="file" accept=".json,application/json" hidden>
+				</div>
+			</div>
+
+			<div class="nova-card">
+				<h2>Import from SnoozeTabs</h2>
+				<p class="card-text">Move your snoozed tabs over from the SnoozeTabs extension, wake-up times included.</p>
+				<div class="buttons">
+					<button id="import-snoozetabs" class="nova-button" type="button">Import from SnoozeTabs…</button>
+				</div>
+			</div>
+		</section>
+		<section id="shortcuts" class="section" hidden>
+			<h2 class="section-title">Shortcuts</h2>
+
+			<div class="nova-card">
+				<p class="card-text">Click a shortcut and press the keys you want: Ctrl or Alt together with a letter, number or function key, optionally with Shift. Snooze shortcuts act on the current tab, or on all selected tabs. If a shortcut is already used by Firefox or another add-on, the other one may win.</p>
+				<div id="shortcut-list"></div>
+				<div class="buttons">
+					<button id="shortcuts-reset" class="nova-button" type="button">Restore defaults</button>
+				</div>
+			</div>
+
+			<div class="nova-card">
+				<h2>In the snooze menu</h2>
+				<dl class="key-list">
+					<dt>1 - 6</dt><dd>Pick a snooze option</dd>
+					<dt>↑ ↓</dt><dd>Move through the menu</dd>
+					<dt>Enter</dt><dd>Choose the highlighted item</dd>
+					<dt>Esc</dt><dd>Back from the date picker, or close the menu</dd>
+				</dl>
+			</div>
+		</section>
+
+		<section id="about" class="section" hidden>
+			<h2 class="section-title">About</h2>
+
+			<p class="heads-up">Heads up: TabShush was made with AI. I understand not everyone's on board with that, hence this disclosure.</p>
+			<div class="nova-card about">
+				<h2 class="about-title"><img src="icons/icon.svg" alt="" width="32" height="32"> TabShush <span id="version" class="about-version"></span></h2>
+				<p>Listen, I don't know about you, but I'll readily admit I have a bit of a tab hoarding problem. I'll come across something cool, say an upcoming Ben Affleck movie, and I'll be like "Nice! I want to go check out that Ben Affleck movie when it comes out 3 months from now." But then I can't be arsed to add it to my calender. So what do I do? I use the <a href="https://github.com/bwinton/SnoozeTabs#readme">SnoozeTabs add-on</a> to snooze that puppy until release week comes a-knockin'.</p>
+
+				<p>SnoozeTabs has been great. But there hasn't been an update for it for few years. In fact, 1.1.0 was released on Feb 22, 2018. The dev owes you and me didly squad, of course, but there are a few UX things that irk me, like the time picker. And the lack of dark mode. And how it stands out like a sore thumb in dark mode. And one crappy day it will snooze its last tab and stop working.</p>
+
+				<p>So I've toyed with the idea of forking it, but I'm not an extension developer. But with AI, for better or worse, that's a little less of a concern. Heck, people are out there cloning freakin' PhotoShop. So I thought "why not have AI build this add-on for me?" And, as it happens, for you!</p>
+
+				<p>Ladies and gentleman, I bring you <strong>TabShush</strong>.</p>
+
+				<p>Not ready for a tab just yet? Give it a little shush! TabShush tucks it away and brings it back right when you want it: later today, tomorrow, this weekend, the next time Firefox opens, or whenever you like. When a tab wakes up, it pops in next to the one you're on with a gently ringing bell, so it never sneaks past you. Keep your snoozed tabs in bookmarks and they'll even follow you to your other devices.</p>
+
+
+				<p><a id="github" class="nova-link" href="https://github.com/appel/tabshush" target="_blank" rel="noopener noreferrer">Source code on GitHub</a></p>
+			</div>
+
+			<div class="nova-card">
+				<h2>Acknowledgements</h2>
+				<p class="card-text">Icons from <a class="nova-link" href="https://icons.getbootstrap.com" target="_blank" rel="noopener noreferrer">Bootstrap Icons</a>, © The Bootstrap Authors, released under the MIT License.</p>
+			</div>
+		</section>
+	</main>
+
+	<dialog id="picker-dialog" class="dialog">
+		<h3 id="picker-title">Change wake-up time</h3>
+		<fieldset id="picker-devices" class="picker-devices" hidden>
+			<legend>Wake on</legend>
+			<div id="picker-device-list" class="picker-device-list"></div>
+		</fieldset>
+		<div id="picker"></div>
+	</dialog>
+
+	<dialog id="confirm-dialog" class="dialog">
+		<form method="dialog">
+			<h3 id="confirm-title"></h3>
+			<p id="confirm-text"></p>
+			<label id="confirm-option-row" class="confirm-option"><input id="confirm-option" type="checkbox"> <span id="confirm-option-label"></span></label>
+			<div class="dialog-buttons">
+				<button value="cancel" class="nova-button">Cancel</button>
+				<button id="confirm-ok" value="ok" class="nova-button primary">OK</button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="snoozetabs-dialog" class="dialog wide">
+		<form method="dialog">
+			<h3>Import from SnoozeTabs</h3>
+			<p class="card-text">Extensions cannot read each other's data, so this takes one copy and paste:</p>
+			<ol class="steps">
+				<li>Open <strong>about:debugging#/runtime/this-firefox</strong> in a new tab.</li>
+				<li>At <strong>SnoozeTabs</strong>, click <strong>Inspect</strong> and open the <strong>Console</strong> tab.</li>
+				<li>Paste this line there and press Enter. It copies SnoozeTabs' data to the clipboard:
+					<span class="command-row"><code id="snoozetabs-command">copy(JSON.stringify(await browser.storage.local.get()))</code><button id="copy-command" class="nova-button" type="button">Copy</button></span>
+				</li>
+				<li>Paste the result below.</li>
+			</ol>
+			<textarea id="snoozetabs-data" class="nova-input" rows="5" spellcheck="false" placeholder="Paste the SnoozeTabs data here" aria-label="SnoozeTabs data"></textarea>
+			<p class="card-text">Firefox may ask you to type "allow pasting" in the console first; that is a safety check for pasting code. SnoozeTabs keeps its own copy, so you can remove it once the import looks right.</p>
+			<div class="dialog-buttons">
+				<button value="cancel" class="nova-button">Cancel</button>
+				<button id="snoozetabs-ok" value="ok" class="nova-button primary">Import</button>
+			</div>
+		</form>
+	</dialog>
+
+	<div id="toast" class="toast" role="status" hidden></div>
+
+	<script src="shared/dom.js"></script>
+	<script src="shared/time.js"></script>
+	<script src="shared/store.js"></script>
+	<script src="shared/picker.js"></script>
+	<script src="shortcuts.js"></script>
+	<script src="snoozed.js"></script>
+</body>
+</html>

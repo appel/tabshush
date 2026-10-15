@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>TabShush</title>
+	<link rel="stylesheet" href="shared/nova.css">
+	<link rel="stylesheet" href="shared/picker.css">
+	<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+	<section id="main-view">
+		<header class="popup-header">
+			<h1 id="target-title">Snooze tab</h1>
+			<p id="target-detail" class="target-detail"></p>
+		</header>
+		<fieldset id="wake-on" class="wake-on" hidden>
+			<legend>Wake on</legend>
+			<div id="wake-on-list" class="wake-on-list"></div>
+		</fieldset>
+		<div class="menu-list">
+			<div id="presets" class="menu-list"></div>
+			<button id="pick" class="nova-menu-item" type="button"></button>
+		</div>
+		<hr class="nova-separator">
+		<div id="coming-up" class="coming-up" hidden>
+			<p class="coming-up-label">Coming up</p>
+			<div id="coming-up-row" class="coming-up-row"></div>
+		</div>
+		<hr id="coming-up-separator" class="nova-separator" hidden>
+		<div class="menu-list">
+			<button id="manage" class="nova-menu-item" type="button"></button>
+			<button id="settings" class="nova-menu-item" type="button"></button>
+		</div>
+	</section>
+
+	<section id="pick-view" hidden>
+		<header class="popup-header with-back">
+			<button id="pick-back" class="nova-icon-button" type="button" aria-label="Back"></button>
+			<h1>Pick a date and time</h1>
+		</header>
+		<div id="picker"></div>
+	</section>
+
+	<script src="shared/dom.js"></script>
+	<script src="shared/time.js"></script>
+	<script src="shared/store.js"></script>
+	<script src="shared/picker.js"></script>
+	<script src="popup.js"></script>
+</body>
+</html>

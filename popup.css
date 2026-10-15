@@ -1,0 +1,176 @@
+body
+{
+	width: 340px;
+	margin: 0;
+	padding: 0.5rem;
+	background: var(--nova-panel);
+	color: var(--nova-text);
+	font: 0.875rem/1.4 var(--nova-font);
+}
+
+*
+{
+	box-sizing: border-box;
+}
+
+[hidden]
+{
+	display: none !important;
+}
+
+.popup-header
+{
+	padding: 0.5rem 0.75rem 0.625rem;
+	text-align: center;
+}
+
+.popup-header h1
+{
+	margin: 0;
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+.target-detail
+{
+	margin: 0.125rem 0 0;
+	overflow: hidden;
+	color: var(--nova-text-muted);
+	font-size: 0.7612rem;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.target-detail.warning
+{
+	color: var(--nova-danger);
+	white-space: normal;
+}
+
+.popup-header.with-back
+{
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 40px;
+	padding-top: 0;
+}
+
+.popup-header.with-back .nova-icon-button
+{
+	position: absolute;
+	left: 0;
+}
+
+.menu-list
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.nova-menu-item .count
+{
+	min-width: 20px;
+	padding: 0 0.375rem;
+	border-radius: var(--nova-radius-pill);
+	background: var(--nova-hover);
+	color: var(--nova-text-muted);
+	font-size: 0.7612rem;
+	text-align: center;
+}
+
+.coming-up
+{
+	padding: 0.125rem 0.75rem 0.25rem;
+}
+
+.coming-up-label
+{
+	margin: 0 0 0.125rem;
+	color: var(--nova-text-muted);
+	font-size: 0.7rem;
+}
+
+.coming-up-row
+{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 28px;
+}
+
+.coming-up-row .favicon
+{
+	flex: none;
+	width: 16px;
+	height: 16px;
+}
+
+.coming-up-title
+{
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.coming-up-when
+{
+	flex: none;
+	color: var(--nova-text-muted);
+	white-space: nowrap;
+}
+
+.coming-up-row .nova-icon-button
+{
+	width: 24px;
+	height: 24px;
+	margin-inline-end: -0.375rem;
+}
+
+/* "Wake on": shown when snoozed tabs sync between several devices. */
+.wake-on
+{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 12px;
+	margin: 0 0.75rem 0.5rem;
+	padding: 0;
+	border: 0;
+}
+
+.wake-on legend
+{
+	float: left;
+	margin-inline-end: 0.25rem;
+	padding: 0;
+	color: var(--nova-text-muted);
+	font-size: 0.7612rem;
+}
+
+.wake-on-list
+{
+	display: contents;
+}
+
+.wake-on label
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 0.8138rem;
+}
+
+.wake-on input
+{
+	margin: 0;
+	accent-color: var(--nova-accent-strong);
+}
+
+#picker
+{
+	padding: 0 0.25rem 0.25rem;
+}
