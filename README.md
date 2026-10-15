@@ -1,6 +1,8 @@
 # TabShush
 
-A Firefox add-on for snoozing your tabs. Not ready for a tab just yet? Give it a little shush: TabShush closes it now and brings it back when you want it.
+A Firefox add-on for snoozing your tabs. Not ready for a tab just yet? Give it a little shush: TabShush closes it now and brings it back on your schedule.
+
+**Work in progress**, so tread carefully and pardon my dust.
 
 ## Features
 
@@ -29,7 +31,14 @@ TabShush collects no data. Everything stays in your browser, or in your own book
 
 ## Install
 
-Not on addons.mozilla.org yet. To try it from source, open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on** and pick `manifest.json`.
+Not on addons.mozilla.org yet, but aiming to! Until then:
+
+1. Download the `.xpi` file from the newest [release](https://github.com/appel/tabshush/releases). These are pre-releases, signed by Mozilla.
+2. Open it in Firefox: drag it onto a Firefox window, or go to `about:addons`, click the gear icon and choose **Install Add-on From File**.
+
+To get a newer version, install the newer `.xpi` the same way. Your settings stay. Requires Firefox 128 or later.
+
+To try it from source instead, open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on** and pick `manifest.json`. Temporary add-ons are removed when Firefox closes.
 
 ## Development
 
